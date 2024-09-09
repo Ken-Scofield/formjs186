@@ -1,0 +1,22 @@
+{
+  "name": "@bpmn-io/form-js-integration",
+  "version": "1.8.6",
+  "description": "A set of form-js integration testing resources",
+  "private": true,
+  "scripts": {
+    "test": "run-s test:types",
+    "test:types": "tsc src/application.ts --outDir dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/form-js.git",
+    "directory": "packages/form-js-integration"
+  },
+  "author": {
+    "name": "bpmn.io contributors",
+    "url": "https://github.com/bpmn-io"
+  },
+  "dependencies": {
+    "@bpmn-io/form-js": "^1.8.6"
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "id": "Form_1",
+  "type": "default",
+  "components": [
+    {
+      "id": "ExpressionField_1",
+      "type": "expression",
+      "key": "expression",
+      "expression": "= 3 + 4",
+      "computeOn": "change"
+    },
+    {
+      "id": "Text_1",
+      "type": "text",
+      "text": "# Invoice\n\nLorem _ipsum_ __dolor__ `sit`.\n\nA list of BPMN symbols:\n* Start Event\n* Task\nLearn more about [forms](https://bpmn.io).\n\nThis [malicious link](javascript:throw onerror=alert,'some string',123,'haha') __should not work__."
+    },
+    {
+      "id": "Html_1",
+      "type": "html",
+      "content": "<h1>My HTML</h1><p style='color: green'>My styled HTML content</p>"
+    },
+    {
+      "id": "Group_1",
+      "type": "group",
+      "label": "Supplementary Information",
+      "path": "invoiceDetails",
+      "showOutline": true,
+      "components": [
+        {
+          "id": "GroupTextfield_1",
+          "type": "textfield",
+          "key": "supplementaryInfo1",
+          "label": "Field 1"
+        },
+        {
+          "id": "GroupTextfield_2",
+          "type": "textfield",
+          "key": "supplementaryInfo2",
+          "label": "Field 2"
+        }
+      ]
+    },
+    {
+      "id": "DynamicList_1",
+      "type": "dynamiclist",
+      "label": "Clients",
+      "path": "clients",
+      "showOutline": true,
+      "isRepeating": true,
+      "defaultRepetitions": 2,
+      "allowAddRemove": true,
+      "components": [
+        {
+          "id": "DynamicListTextField_1",
+          "type": "textfield",
+          "key": "clientSurname",
+          "label": "Surname"
+        },
+        {
+          "id": "DynamicListTextField_2",
+          "type": "textfield",
+          "key": "clientName",
+          "label": "Name"
+        }
+      ]
+    },
+    {
+      "id": "Textfield_1",
+      "key": "creditor",
+      "label": "Creditor",
+      "type": "textfield",
+      "validate": {
+        "required": true
+      },
+      "properties": {
+        "firstName": "John",
+        "middleName": "Richard",
+        "lastName": "Doe"
+      }
+    },
+    {
+      "id": "Textfield_2",
+      "description": "An invoice number in the format: C-123.",
+      "key": "invoiceNumber",
+      "label": "Invoice Number",
+      "type": "textfield",
+      "validate": {
+        "pattern": "^C-[0-9]+$"
+      }
+    },
+    {
+      "id": "Number_1",
+      "key": "amount",
+      "label": "Amount",
+      "type": "number",
+      "validate": {
+        "min": 0,
+        "max": 1000
+      }
+    },
+    {
+      "id": "Checkbox_1",
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox"
+    },
+    {
+      "id": "Textfield_3",
+      "key": "approvedBy",
+      "label": "Approved By",
+      "type": "textfield"
+    },
+    {
+      "id": "Textarea_1",
+      "key": "approverComments",
+      "label": "Approver comments",
+      "type": "textarea"
+    },
+    {
+      "id": "Checklist_1",
+      "key": "mailto",
+      "label": "Email data to",
+      "type": "checklist",
+      "values": [
+        {
+          "label": "Approver",
+          "value": "approver"
+        },
+        {
+          "label": "Manager",
+          "value": "manager"
+        },
+        {
+          "label": "Regional Manager",
+          "value": "regional-manager"
+        }
+      ]
+    },
+    {
+      "id": "Radio_1",
+      "key": "product",
+      "label": "Product",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Camunda Platform",
+          "value": "camunda-platform"
+        },
+        {
+          "label": "Camunda Cloud",
+          "value": "camunda-cloud"
+        }
+      ]
+    },
+    {
+      "id": "Taglist_1",
+      "key": "tags",
+      "label": "Taglist",
+      "type": "taglist",
+      "values": [
+        {
+          "label": "Tag1",
+          "value": "tag1"
+        },
+        {
+          "label": "Tag2",
+          "value": "tag2"
+        },
+        {
+          "label": "Tag3",
+          "value": "tag3"
+        },
+        {
+          "label": "Tag4",
+          "value": "tag4"
+        },
+        {
+          "label": "Tag5",
+          "value": "tag5"
+        },
+        {
+          "label": "Tag6",
+          "value": "tag6"
+        },
+        {
+          "label": "Tag7",
+          "value": "tag7"
+        },
+        {
+          "label": "Tag8",
+          "value": "tag8"
+        },
+        {
+          "label": "Tag9",
+          "value": "tag9"
+        },
+        {
+          "label": "Tag10",
+          "value": "tag10"
+        },
+        {
+          "label": "Tag11",
+          "value": "tag11"
+        }
+      ]
+    },
+    {
+      "id": "Select_1",
+      "key": "language",
+      "label": "Language",
+      "type": "select",
+      "values": [
+        {
+          "label": "German",
+          "value": "german"
+        },
+        {
+          "label": "English",
+          "value": "english"
+        }
+      ]
+    },
+    {
+      "id": "Datetime_1",
+      "key": "conversation",
+      "type": "datetime",
+      "subtype": "datetime",
+      "dateLabel": "Date of conversation",
+      "timeLabel": "Time of conversation",
+      "timeSerializingFormat": "utc_normalized",
+      "timeInterval": 15,
+      "use24h": false
+    },
+    {
+      "id": "Image_1",
+      "source": "=logo",
+      "alt": "The bpmn.io logo",
+      "type": "image"
+    },
+    {
+      "id": "Spacer_1",
+      "type": "spacer",
+      "height": 60
+    },
+    {
+      "id": "Button_1",
+      "action": "submit",
+      "label": "Submit",
+      "type": "button"
+    },
+    {
+      "id": "Button_2",
+      "action": "reset",
+      "label": "Reset",
+      "type": "button"
+    }
+  ]
+}

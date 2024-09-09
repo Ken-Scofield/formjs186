@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "number",
+      "validate": {
+        "min": 0,
+        "max": 1000
+      }
+    },
+    {
+      "label": "Text Field",
+      "type": "textfield",
+      "id": "Field",
+      "key": "text",
+      "conditional": {
+        "hide": "=amount <= 2"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form",
+  "schemaVersion": 5
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "#/component/type",
+  "description": "The type of a form field.",
+  "enum": [
+    "textfield",
+    "number",
+    "datetime",
+    "textarea",
+    "checkbox",
+    "radio",
+    "select",
+    "checklist",
+    "taglist",
+    "image",
+    "text",
+    "html",
+    "button",
+    "spacer",
+    "group",
+    "dynamiclist",
+    "separator",
+    "table",
+    "iframe",
+    "expression"
+  ]
+}

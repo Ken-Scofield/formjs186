@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "disabled": true,
+      "key": "creditor",
+      "label": "Creditor",
+      "id": "Creditor_ID",
+      "type": "textfield",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "description": "An invoice number in the format: C-123.",
+      "key": "invoiceNumber",
+      "label": "Invoice Number",
+      "type": "textfield",
+      "validate": {
+        "pattern": "^C-[0-9]+$"
+      }
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "number",
+      "validate": {
+        "min": 0,
+        "max": 1000
+      }
+    },
+    {
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox"
+    },
+    {
+      "key": "approverComments",
+      "label": "Approver comments",
+      "type": "textarea"
+    },
+    {
+      "label": "Submit",
+      "type": "button"
+    },
+    {
+      "action": "reset",
+      "label": "Reset",
+      "type": "button"
+    }
+  ],
+  "type": "default"
+}

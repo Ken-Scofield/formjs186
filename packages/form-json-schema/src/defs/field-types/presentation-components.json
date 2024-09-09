@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "type": {
+      "enum": ["table"]
+    }
+  },
+  "required": ["type"]
+}

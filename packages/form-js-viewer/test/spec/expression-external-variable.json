@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "source": "=logo",
+      "type": "image"
+    },
+    {
+      "alt": "=alt",
+      "type": "image"
+    },
+    {
+      "alt": "This is just an image",
+      "type": "image"
+    },
+    {
+      "text": "=myText",
+      "type": "text"
+    }
+  ],
+  "type": "default",
+  "id": "Form",
+  "schemaVersion": 6
+}

@@ -1,0 +1,102 @@
+{
+  "$schema": "../../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "id": "Textfield_1",
+      "key": "invoiceNumber",
+      "label": "Invoice Number",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1",
+        "columns": 4
+      }
+    },
+    {
+      "id": "Number_1",
+      "key": "amount",
+      "label": "Amount",
+      "type": "number",
+      "layout": {
+        "row": "Row_1",
+        "columns": 4
+      }
+    },
+    {
+      "id": "Checkbox_1",
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_2",
+        "columns": 16
+      }
+    },
+    {
+      "id": "Textfield_2",
+      "key": "approvedBy",
+      "label": "Approved By",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_3",
+        "columns": 6
+      }
+    },
+    {
+      "id": "Textarea_1",
+      "key": "approverComments",
+      "label": "Approver comments",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_3",
+        "columns": 10
+      }
+    },
+    {
+      "id": "Datetime_1",
+      "key": "approvalDate",
+      "label": "Approval date",
+      "type": "datetime",
+      "dateLabel": "Approval date",
+      "layout": {
+        "row": "Row_1"
+      }
+    },
+    {
+      "id": "Checkbox_2",
+      "key": "checkbpx",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1",
+        "columns": 2
+      }
+    },
+    {
+      "id": "AutoTextfield_1",
+      "key": "auto_1",
+      "label": "Auto Textfield 1",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_4"
+      }
+    },
+    {
+      "id": "AutoTextfield_2",
+      "key": "auto_2",
+      "label": "Auto Textfield 2",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_4"
+      }
+    },
+    {
+      "id": "AutoTextfield_3",
+      "key": "auto_3",
+      "label": "Auto Textfield 3",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_4"
+      }
+    }
+  ],
+  "type": "default"
+}

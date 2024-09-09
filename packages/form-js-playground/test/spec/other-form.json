@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "action": "reset",
+      "id": "foo",
+      "label": "Reset",
+      "type": "button"
+    }
+  ],
+  "type": "default"
+}

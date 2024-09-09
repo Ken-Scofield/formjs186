@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "number",
+      "readonly": "=foo + bar = 2"
+    },
+    {
+      "label": "Text Field",
+      "type": "textfield",
+      "id": "Field",
+      "key": "text",
+      "readonly": true
+    }
+  ],
+  "type": "default",
+  "id": "Form",
+  "schemaVersion": 9
+}

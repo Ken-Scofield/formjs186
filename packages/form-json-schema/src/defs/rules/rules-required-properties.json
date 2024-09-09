@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "allOf": [
+    {
+      "if": {
+        "$ref": "../field-types/inputs.json"
+      },
+      "then": {
+        "required": ["key"]
+      }
+    },
+    {
+      "if": {
+        "$ref": "../field-types/presentation-components.json"
+      },
+      "then": {
+        "oneOf": [
+          {
+            "required": ["dataSource", "columns"]
+          },
+          {
+            "required": ["dataSource", "columnsExpression"]
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "expression"
+          }
+        },
+        "required": ["type"]
+      },
+      "then": {
+        "required": ["expression", "computeOn"]
+      }
+    }
+  ]
+}

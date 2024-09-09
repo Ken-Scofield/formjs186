@@ -1,0 +1,168 @@
+{
+  "$schema": "../../../form-json-schema/resources/schema.json",
+  "components": [
+    {
+      "type": "text",
+      "text": "# Invoice\n\nLorem _ipsum_ __dolor__ `sit`.\n\nA list of BPMN symbols:\n\n* Start Event\n* Task\n\nLearn more about [forms](https://bpmn.io).\n  \n  \nThis [malicious link](javascript:throw onerror=alert,'some string',123,'haha') __should not work__."
+    },
+    {
+      "defaultValue": "Max Mustermann GmbH",
+      "key": "creditor",
+      "label": "Creditor",
+      "type": "textfield",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "description": "An invoice number in the format: C-123.",
+      "key": "invoiceNumber",
+      "label": "Invoice Number",
+      "type": "textfield",
+      "validate": {
+        "pattern": "^C-[0-9]+$"
+      }
+    },
+    {
+      "defaultValue": 0,
+      "key": "amount",
+      "label": "Amount",
+      "type": "number",
+      "validate": {
+        "min": 0,
+        "max": 1000
+      }
+    },
+    {
+      "defaultValue": ["regional-manager", "approver"],
+      "key": "mailto",
+      "label": "Email data to",
+      "type": "checklist",
+      "values": [
+        {
+          "label": "Approver",
+          "value": "approver"
+        },
+        {
+          "label": "Manager",
+          "value": "manager"
+        },
+        {
+          "label": "Regional Manager",
+          "value": "regional-manager"
+        }
+      ]
+    },
+    {
+      "defaultValue": true,
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox"
+    },
+    {
+      "key": "approvedBy",
+      "label": "Approved By",
+      "type": "textfield"
+    },
+    {
+      "defaultValue": "Sample comment provided by the approver",
+      "key": "approverComments",
+      "label": "Approver comments",
+      "type": "textarea"
+    },
+    {
+      "defaultValue": "camunda-platform",
+      "key": "product",
+      "label": "Product",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Camunda Platform",
+          "value": "camunda-platform"
+        },
+        {
+          "label": "Camunda Cloud",
+          "value": "camunda-cloud"
+        }
+      ]
+    },
+    {
+      "defaultValue": ["tag1", "tag2", "tag3"],
+      "key": "tags",
+      "label": "Taglist",
+      "type": "taglist",
+      "values": [
+        {
+          "label": "Tag1",
+          "value": "tag1"
+        },
+        {
+          "label": "Tag2",
+          "value": "tag2"
+        },
+        {
+          "label": "Tag3",
+          "value": "tag3"
+        },
+        {
+          "label": "Tag4",
+          "value": "tag4"
+        },
+        {
+          "label": "Tag5",
+          "value": "tag5"
+        },
+        {
+          "label": "Tag6",
+          "value": "tag6"
+        },
+        {
+          "label": "Tag7",
+          "value": "tag7"
+        },
+        {
+          "label": "Tag8",
+          "value": "tag8"
+        },
+        {
+          "label": "Tag9",
+          "value": "tag9"
+        },
+        {
+          "label": "Tag10",
+          "value": "tag10"
+        },
+        {
+          "label": "Tag11",
+          "value": "tag11"
+        }
+      ]
+    },
+    {
+      "defaultValue": "english",
+      "key": "language",
+      "label": "Language",
+      "type": "select",
+      "values": [
+        {
+          "label": "German",
+          "value": "german"
+        },
+        {
+          "label": "English",
+          "value": "english"
+        }
+      ]
+    },
+    {
+      "label": "Submit",
+      "type": "button"
+    },
+    {
+      "action": "reset",
+      "label": "Reset",
+      "type": "button"
+    }
+  ],
+  "type": "default"
+}
