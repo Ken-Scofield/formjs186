@@ -18,13 +18,11 @@ export function sanitizeDateTimePickerValue(options) {
 
   if (typeof value !== 'string') return null;
 
-  if (subtype === DATETIME_SUBTYPES.DATE && (isInvalidDateString(value) || !isDateInputInformationMatching(value)))
-    return null;
-  if (subtype === DATETIME_SUBTYPES.TIME && parseIsoTime(value) === null) return null;
-  if (
-    subtype === DATETIME_SUBTYPES.DATETIME &&
-    (isInvalidDateString(value) || !isDateTimeInputInformationSufficient(value))
-  )
+  const t = value.trim().replace(' ', 'T'); // kim:
+
+  if (subtype === DATETIME_SUBTYPES.DATE && (isInvalidDateString(t) || !isDateInputInformationMatching(t))) return null;
+  if (subtype === DATETIME_SUBTYPES.TIME && parseIsoTime(t) === null) return null;
+  if (subtype === DATETIME_SUBTYPES.DATETIME && (isInvalidDateString(t) || !isDateTimeInputInformationSufficient(t)))
     return null;
 
   return value;

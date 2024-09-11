@@ -85,8 +85,8 @@ export function serializeTime(minutes, offset, timeSerializingFormat) {
       'Z'
     );
   }
-
-  const baseTime = _getZeroPaddedString(Math.floor(minutes / 60)) + ':' + _getZeroPaddedString(minutes % 60);
+  // kim:
+  const baseTime = _getZeroPaddedString(Math.floor(minutes / 60)) + ':' + _getZeroPaddedString(minutes % 60) + ':00';
   const addUTCOffset = timeSerializingFormat === TIME_SERIALISING_FORMATS.UTC_OFFSET;
 
   return baseTime + (addUTCOffset ? formatTimezoneOffset(offset) : '');

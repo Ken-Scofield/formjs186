@@ -83,7 +83,6 @@ export function Datetime(props) {
 
   useEffect(() => {
     let { date, time } = getNullDateTime();
-    console.log(1111);
 
     switch (subtype) {
       case DATETIME_SUBTYPES.DATE: {
@@ -95,7 +94,8 @@ export function Datetime(props) {
         break;
       }
       case DATETIME_SUBTYPES.DATETIME: {
-        date = new Date(Date.parse(value));
+        date = new Date(Date.parse(value)); // kim:
+        // date = new Date(Date.parse(tCompatDateTime(value)));
         time = isValidDate(date) ? 60 * date.getHours() + date.getMinutes() : null;
         break;
       }
@@ -103,6 +103,12 @@ export function Datetime(props) {
 
     setDateTime({ date, time });
   }, [subtype, value]);
+
+  // const tCompatDateTime = (valString) => {
+  //   if (typeof valString === 'string') {
+  //     return valString.trim().replace(' ', 'T');
+  //   }
+  // };
 
   const computeAndSetState = useCallback(
     ({ date, time }) => {
