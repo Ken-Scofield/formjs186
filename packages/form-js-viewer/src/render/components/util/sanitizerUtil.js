@@ -18,7 +18,7 @@ export function sanitizeDateTimePickerValue(options) {
 
   if (typeof value !== 'string') return null;
 
-  const t = value.trim().replace(' ', 'T'); // kim:
+  const t = subtype === DATETIME_SUBTYPES.DATETIME ? value.trim().replace(' ', 'T') : value; // kim:
 
   if (subtype === DATETIME_SUBTYPES.DATE && (isInvalidDateString(t) || !isDateInputInformationMatching(t))) return null;
   if (subtype === DATETIME_SUBTYPES.TIME && parseIsoTime(t) === null) return null;

@@ -1,4 +1,44 @@
 @use 'form-js-editor-base.css';
-//@use '@bpmn-io/draggle/dist/dragula.css';
-@use '@bpmn-io/draggle/dist/draggle.css';
+@use '@bpmn-io/draggle/dist/dragula.css';
+//@use '@bpmn-io/draggle/dist/draggle.css';
 @use '@bpmn-io/properties-panel/dist/assets/properties-panel.css';
+
+/* AI Helper Group 样式 */
+.bio-properties-panel-group.ai-helper-group {
+  border-top: 2px solid #4a90e2;
+  margin-top: 10px;
+  padding-top: 10px;
+  
+  .bio-properties-panel-group-header {
+    font-weight: bold;
+    color: #4a90e2;
+  }
+  
+  .bio-properties-panel-textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  .ai-helper-group {
+    padding: 5px 0;
+  }
+  
+  .bio-properties-panel-select {
+    width: 100%;
+    margin: 5px 0;
+    
+    select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      background-color: #fff;
+      
+      &:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 0 1px #4a90e2;
+      }
+    }
+  }
+}

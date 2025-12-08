@@ -10,8 +10,36 @@ const browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(',');
 
 const singleStart = process.env.SINGLE_START;
 
-// use puppeteer provided Chrome for testing
-process.env.CHROME_BIN = require('puppeteer').executablePath();
+// Use system Chrome for testing
+// process.env.CHROME_BIN = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+try {
+  // Use system Chrome for testing
+  process.env.CHROME_BIN = require('puppeteer').executablePath();
+} catch (error) {
+  // 如果 puppeteer 不可用，使用系统安装的 Chrome
+  const chromePaths = [
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // Windows
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // Windows 32-bit
+    '/usr/bin/google-chrome', // Linux
+    '/usr/bin/chromium-browser', // Linux Chromium
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', // macOS
+  ];
+
+  for (const chromePath of chromePaths) {
+    try {
+      require('fs').accessSync(chromePath);
+      process.env.CHROME_BIN = chromePath;
+      console.log('Using Chrome at:', chromePath);
+      break;
+    } catch (e) {
+      // 继续尝试下一个路径
+    }
+  }
+
+  if (!process.env.CHROME_BIN) {
+    console.warn('未找到 Chrome 浏览器，测试可能需要手动配置 CHROME_BIN 环境变量');
+  }
+}
 
 const suite = coverage ? 'test/coverageBundle.js' : 'test/testBundle.js';
 

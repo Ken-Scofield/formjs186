@@ -10,6 +10,7 @@ import {
   TableHeaderGroups,
   LayoutGroup,
   SecurityAttributesGroup,
+  AIHelperGroup,
 } from './groups';
 
 import { hasEntryConfigured } from './Util';
@@ -23,6 +24,7 @@ export class PropertiesProvider {
   _filterVisibleEntries(groups, field, getService) {
     return groups.forEach((group) => {
       const { entries } = group;
+      console.log(111);
 
       const { type } = field;
 
@@ -63,6 +65,7 @@ export class PropertiesProvider {
         ConditionGroup(field, editField),
         LayoutGroup(field, editField),
         AppearanceGroup(field, editField),
+        AIHelperGroup(field, editField, getService),
         SerializationGroup(field, editField),
         ConstraintsGroup(field, editField),
         ValidationGroup(field, editField),
