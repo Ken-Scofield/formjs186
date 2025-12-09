@@ -1,4 +1,4 @@
-import { AIGenerateTypeEntry, AIPromptEntry } from '../entries/ai';
+import { AIGenerateTypeEntry, AIPromptEntry, AIImageVerificationEntry } from '../entries/ai';
 
 // Default supported field types
 const DEFAULT_SUPPORTED_TYPES = ['textfield', 'textarea', 'number', 'select', 'radio', 'checkbox', 'checklist'];
@@ -15,14 +15,18 @@ export function AIHelperGroup(field, editField, getService) {
   }
 
   // Get entries
-  const entries = [...AIGenerateTypeEntry({ field, editField })];
+  const entries = [];
+
+  // Add AI Generation Type entry
+  entries.push(...AIGenerateTypeEntry({ field, editField }));
 
   // Add prompt entry if AI generation is enabled
   if (aiGenerateType && aiGenerateType !== 'none') {
     entries.push(...AIPromptEntry({ field, editField }));
   }
 
-  console.log('entryies', entries);
+  // Add AI Image Verification entry
+  entries.push(...AIImageVerificationEntry({ field, editField, id: 'ai-image-verification' }));
 
   if (entries.length === 0) {
     return null;
