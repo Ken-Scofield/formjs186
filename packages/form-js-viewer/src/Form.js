@@ -226,6 +226,48 @@ export class Form {
   }
 
   /**
+   * @param {any} id
+   * @param {any} errorPreset
+   */
+  validateByFieldId(id, errorPreset) {
+    const formFieldRegistry = this.get('formFieldRegistry'),
+      formFieldInstanceRegistry = this.get('formFieldInstanceRegistry'),
+      validator = this.get('validator');
+
+    const fieldInstance = formFieldInstanceRegistry.get(id);
+    const field = formFieldRegistry.get(id);
+
+    if (!fieldInstance || !field) {
+      return;
+    }
+
+    const { data } = this._getState();
+    const errors = { ...errorPreset };
+
+    const getErrorPath = (id, indexes) => [id, ...Object.values(indexes || {})];
+
+    const { valuePath, indexes } = fieldInstance;
+
+    // (1) Skip disabled fields
+    if (field.disabled) {
+      return;
+    }
+
+    // (2) Validate the field instance
+    const value = get(data, valuePath);
+    const fieldErrors = validator.validateFieldInstance(fieldInstance, value);
+
+    if (fieldErrors.length) {
+      set(errors, getErrorPath(field.id, indexes), fieldErrors);
+    }
+
+    this._setState({ errors });
+
+    // @ts-ignore
+    return errors;
+  }
+
+  /**
    * @param {Element|string} parentNode
    */
   attachTo(parentNode) {

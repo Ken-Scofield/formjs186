@@ -1,14 +1,16 @@
-import { SelectEntry, isSelectEntryEdited } from '@bpmn-io/properties-panel';
+import { SelectEntry, isSelectEntryEdited, FeelEntry, isFeelEntryEdited } from '@bpmn-io/properties-panel';
 import { useService } from '../../hooks';
 import { get } from 'min-dash';
+import { FeelExpressionLanguage } from '@bpmn-io/form-js-viewer';
 
 const PATH = ['aiImageVerification'];
 
 const VERIFICATION_TYPES = [
-  { value: 'email', label: '邮箱' },
-  { value: 'phone', label: '手机号' },
-  { value: 'idcard', label: '身份证' },
-  { value: 'custom', label: '自定义' },
+  { value: 'kfjddz', label: '对中照' },
+  { value: 'kfjdgh', label: '工号牌' },
+  { value: 'kfjdhz', label: '回执单' },
+  { value: 'kfjdtj', label: '台阶照' },
+  { value: 'kfjdyd', label: '硬度照' },
 ];
 
 export function AIImageVerificationToggle(props) {
@@ -33,8 +35,9 @@ export function AIImageVerificationToggle(props) {
       enabled: newValue,
     };
 
+    // Set default values when enabling
     if (newValue) {
-      updates.sourceType = 'expression';
+      updates.sourceType = 'default';
       updates.verificationType = VERIFICATION_TYPES[0].value;
       updates.value = '=';
     }
@@ -60,8 +63,45 @@ function VerificationTypeSelect(props) {
   const { field, editField, id } = props;
   const debounce = useService('debounce');
 
+  const expression = get(field, [...PATH, 'value'], '');
+  // const verificationType = get(field, [...PATH, 'verificationType'], '');
+  const sourceType = get(field, [...PATH, 'sourceType'], 'default');
+  // Initialize the expression language
+  const expressionLanguage = new FeelExpressionLanguage();
+  // Get options based on the expression
+  const getOptions = () => {
+    if (sourceType === 'default') {
+      return VERIFICATION_TYPES;
+    }
+    // If source is expression, evaluate it
+    try {
+      if (expression && expression.startsWith('=')) {
+        // const expressionLanguage = new FeelExpressionLanguage();
+        if (!expressionLanguage || !expressionLanguage.isExpression(expression)) {
+          return [];
+        }
+        const evaluatedValue = expressionLanguage.evaluate(expression, {});
+
+        if (Array.isArray(evaluatedValue)) {
+          const vvvs = evaluatedValue.map((item) => ({
+            value: item.value || '',
+            label: item.label || '',
+          }));
+          return vvvs;
+        }
+        return [];
+      }
+    } catch (error) {
+      console.error('Error evaluating expression:');
+      return [];
+    }
+
+    // Fallback to default options if expression is invalid
+    return VERIFICATION_TYPES;
+  };
+
   const getValue = () => {
-    return get(field, [...PATH, 'verificationType'], VERIFICATION_TYPES[0].value);
+    return get(field, [...PATH, 'verificationType'], '');
   };
 
   const setValue = (value) => {
@@ -82,24 +122,41 @@ function VerificationTypeSelect(props) {
     label: '验证类型',
     getValue,
     setValue,
-    getOptions: () => VERIFICATION_TYPES,
+    getOptions,
     debounce,
   });
 }
 
+const SOURCE_TYPES = [
+  { value: 'default', label: '默认值' },
+  { value: 'expression', label: '表达式' },
+];
+
 function SourceTypeSelect(props) {
-  const { field, id } = props;
+  const { field, id, editField } = props;
   const debounce = useService('debounce');
+
+  const getValue = () => get(field, [...PATH, 'sourceType'], 'default');
+
+  const setValue = (value) => {
+    const current = get(field, PATH, {});
+    editField(field, PATH, {
+      ...current,
+      sourceType: value,
+      // Reset value when switching source type
+      value: value === 'default' ? '' : '=',
+    });
+  };
 
   return SelectEntry({
     id: `${id}-source-type`,
     element: field,
     label: '数据来源',
-    getValue: () => 'expression',
-    setValue: () => {}, // No-op since it's read-only
-    getOptions: () => [{ value: 'expression', label: '表达式' }],
+    getValue,
+    setValue,
+    getOptions: () => SOURCE_TYPES,
     debounce,
-    disabled: true,
+    disabled: false, // cancel disable
   });
 }
 
@@ -123,11 +180,10 @@ function ValueInput(props) {
     });
   };
 
-  return {
+  return FeelEntry({
     id: `${id}-value`,
     element: field,
     label: '表达式值',
-    type: 'text',
     getValue,
     setValue,
     debounce,
@@ -141,13 +197,13 @@ function ValueInput(props) {
       }
       return null;
     },
-  };
+  });
 }
 
 export function AIImageVerificationEntry(props) {
   const { field, editField, id } = props;
   const isEnabled = get(field, [...PATH, 'enabled'], false);
-
+  const sourceType = get(field, [...PATH, 'sourceType'], 'default');
   const entries = [
     {
       id: `${id}-toggle`,
@@ -155,6 +211,7 @@ export function AIImageVerificationEntry(props) {
       field,
       editField,
       isEdited: isSelectEntryEdited,
+      isDefaultVisible: (field) => field.type === 'image-upload',
     },
   ];
 
@@ -166,6 +223,7 @@ export function AIImageVerificationEntry(props) {
         field,
         editField,
         isEdited: isSelectEntryEdited,
+        isDefaultVisible: (field) => field.type === 'image-upload',
       },
       {
         id: `${id}-source-type`,
@@ -173,15 +231,21 @@ export function AIImageVerificationEntry(props) {
         field,
         editField,
         isEdited: isSelectEntryEdited,
+        isDefaultVisible: (field) => field.type === 'image-upload',
       },
-      {
+    );
+
+    // Only show value input when source type is expression
+    if (sourceType === 'expression') {
+      entries.push({
         id: `${id}-value`,
         component: ValueInput,
         field,
         editField,
-        isEdited: () => false,
-      },
-    );
+        isEdited: isFeelEntryEdited,
+        isDefaultVisible: (field) => field.type === 'image-upload',
+      });
+    }
   }
 
   return entries;

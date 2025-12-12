@@ -29,7 +29,7 @@ export const PALETTE_GROUPS = [
     id: 'selection',
   },
   {
-    label: '简报',
+    label: '演示',
     id: 'presentation',
   },
   {

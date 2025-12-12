@@ -1,7 +1,7 @@
 import { AIGenerateTypeEntry, AIPromptEntry, AIImageVerificationEntry } from '../entries/ai';
 
 // Default supported field types
-const DEFAULT_SUPPORTED_TYPES = ['textfield', 'textarea', 'number', 'select', 'radio', 'checkbox', 'checklist'];
+const DEFAULT_SUPPORTED_TYPES = ['textfield', 'textarea', 'number', 'image-upload'];
 
 // AI Helper Group
 export function AIHelperGroup(field, editField, getService) {
@@ -17,8 +17,8 @@ export function AIHelperGroup(field, editField, getService) {
   // Get entries
   const entries = [];
 
-  // Add AI Generation Type entry
-  entries.push(...AIGenerateTypeEntry({ field, editField }));
+  // Add AI Generation Type entry (Suspend use here)
+  // entries.push(...AIGenerateTypeEntry({ field, editField }));
 
   // Add prompt entry if AI generation is enabled
   if (aiGenerateType && aiGenerateType !== 'none') {

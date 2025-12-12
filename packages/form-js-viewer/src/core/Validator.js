@@ -162,6 +162,11 @@ function runPresetValidation(field, validation, value) {
     errors.push('字段必须是有效的电子邮件');
   }
 
+  // @kim: run ai image verification
+  if ('aiImageVerification' in validation && value && validation.aiImageVerification['passed'] === false) {
+    errors.push(validation.aiImageVerification['result'] || 'AI校验未通过');
+  }
+
   return errors;
 }
 
